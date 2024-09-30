@@ -14,7 +14,7 @@ public class MapAdventure {
 
 
 
-        Room room1 = new Room("room1","Its freezing in here right, gloomy walls, dark and wet. Be careful not to slip. There are 2 doors in the room");
+        Room room1 = new Room("room1","Its freezing in here. Gloomy walls, dark and wet. Be careful not to slip. There are 2 doors in the room");
         Room room2 = new Room("room2", "The room is dry as bone, drink some water perhaps. We need you soldier! btw there are 2 doors");
         Room room3 = new Room("room3", "its awfully quite in here..with 2 doors");
         Room room4 = new Room("room4", "There are 2 doors and is that children… they're white as snow..");
@@ -53,7 +53,15 @@ public class MapAdventure {
 
         currentroom = room1;
 
+        // ------------------------- del 2 -------------------
 
+        ItemAdventure torch = new ItemAdventure("torch", "an old wooding torch, with a calming warm flame");
+        ItemAdventure rock = new ItemAdventure("rock", "wet and slippery");
+        ItemAdventure paper = new ItemAdventure("paper", "A brown piece of paper with an unknown language written on it");
+
+        room1.addItems(torch);
+        room1.addItems(rock);
+        room2.addItems(paper);
 
 
     }

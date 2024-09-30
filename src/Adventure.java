@@ -7,8 +7,8 @@ public class Adventure {
     private PlayerAdventure player;
 
 public Adventure(){
-    this.map = new MapAdventure();
-    this.player = new PlayerAdventure(map.getRoom());
+    map = new MapAdventure();
+    player = new PlayerAdventure(map.getRoom());
 
 }
 
