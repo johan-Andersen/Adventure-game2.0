@@ -21,45 +21,51 @@ public class UIAdventure {
         Scanner input = new Scanner(System.in);
         String useraction = "";
 
-        while (!useraction.equalsIgnoreCase("exit")) {
+        while (!useraction.equalsIgnoreCase("exit")) {  // While loop makes it possible to "stay" in the game and repeatedly
             useraction = input.nextLine();
-// ----------TO TAKE AN ITEM FROM A ROOM ----------------------------------
-            if (useraction.startsWith("take ")) {
+// ----------TO TAKE AN ITEM FROM A ROOM ------------------------------------------------
+            if (useraction.startsWith("take ")) { // The if-statement checks whether our string user input starts with "take" and we therefore want to take an object
 
-                String[] parts = useraction.split("take ", 2);
-                if (parts.length < 2) {
-                    System.out.println("take what?");
-                } else {
-                    String itemName = parts[1].trim();
-                    ItemAdventure item = adventure.getPlayer().getCurrentRoom().takeItem(itemName);
-                    if (item != null) {
-                        System.out.println("you took " + item.getName());
-                        adventure.getPlayer().addItemToInventory(item);
-                    } else {
+                String[] parts = useraction.split("take ", 2); // The program now checks if we have a second string input
+                if (parts.length < 2) {   // If statement checks if the "parts" (our string input) has less than index 1 (2 spaces)
+                    System.out.println("take what?");  // if it is sout is written
+                } else {  // if its longer than index 0
+                    String itemName = parts[1].trim();  // we set itemName to the value of "parts[1].trim()" which means our string input at index 1,
+                    // aka the string after take. "trim()" makes sure that we are left with only the string at index 1 (no spaces or anything else).
+
+                    ItemAdventure item = adventure.getPlayer().getCurrentRoom().takeItem(itemName);  // We use the method() in our Room class,
+                    // which removes the string in the paremeter and returns null,
+                    if (item != null) {  // Now if the itemName is in the itemsList item will get the value of null
+                        System.out.println("you took " + item.getName());  //sout will be in the console
+                        adventure.getPlayer().addItemToInventory(item);  //the item that has been removed from the room will now be added to the users inventory
+                    } else {  // if the item is not in the room, the user will be told so
                         System.out.println("no such item in this room");
                     }
                 }
 //-------------------------TO LEAVE AN ITEM IN A ROOM ------------------------------------
-            } else if (useraction.startsWith("leave ")) {
-                String[] parts = useraction.split("leave ", 2);
-                if (parts.length < 2) {
-                    System.out.println("leave what?");
-                } else {
-                    String itemName = parts[1].trim();
-                    ItemAdventure itemToDrop = null;
-                    for (ItemAdventure item : adventure.getPlayer().getItemListInventory()) {
-                        if (item.getName().equalsIgnoreCase(itemName)) {
-                            itemToDrop = item;
+            } else if (useraction.startsWith("leave ")) {  // To check if the user want to leave something behind, the else-if statement checks if the
+                // input Starts with leave
+                String[] parts = useraction.split("leave ", 2);  // The program now checks if we have a second string input
+                if (parts.length < 2) {   // If statement checks if the "parts" (our string input) is less than index 1 (2 spaces)
+                    System.out.println("leave what?");  // if it is sout is written
+                } else { // if its longer than index 0
+                    String itemName = parts[1].trim(); // we set itemName to the value of "parts[1].trim()" which means our string input at index 1,
+                    // aka the string after take. "trim()" makes sure that we are left with only the string at index 1 (no spaces or anything else).
+                    ItemAdventure itemToLeave = null; //we set the value of itemToLeave to null
+                    for (ItemAdventure item : adventure.getPlayer().getItemListInventory()) { // We make a for loop to go through our itemListInventory
+                        if (item.getName().equalsIgnoreCase(itemName)) { //if an item in our inventory matches "item", "itemToLeave" will be sat to the value of "Item" and break out of the loop
+                            itemToLeave = item;
                             break;
                         }
 
                     }
-                    if (itemToDrop != null) {
-                        adventure.getPlayer().getCurrentRoom().leaveItem(itemToDrop);
-                        adventure.getPlayer().getItemListInventory().remove(itemToDrop);
+                    if (itemToLeave != null) { // if our "itemToLeave" isnt equal to the value of null, that means our "itemName" (the userinput) could be found in our inventory
+                        adventure.getPlayer().getCurrentRoom().leaveItem(itemToLeave); // And if  the item was in our inventory we will leave it behind in the current room
+                        adventure.getPlayer().getItemListInventory().remove(itemToLeave); // At the same time we will remove it from our inventory.
                         System.out.println("you left " + itemName + " in " + adventure.getPlayer().getCurrentRoom().getName());
                     } else {
-                        System.out.println("you dont have that item...");
+                        System.out.println("you dont have that item...");  // if "itemToLeave" is equal to null, there is
+                        // no match in our inventory and the user will be told no such thign could be found in the inventory
                     }
                 }
             } else {

@@ -67,7 +67,7 @@ public class Room {
             if(item.getName().equalsIgnoreCase(itemName)) { // if the item name matches one within the list
 
                 itemlist.remove(item); // item is removed from the list and the room
-                return item; // item is removed
+                return item;
             }
         }
         return null;  // if the item isnt found within the room null is returned
