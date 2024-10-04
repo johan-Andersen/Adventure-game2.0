@@ -8,7 +8,7 @@ public class Adventure {
 
 public Adventure(){
     map = new MapAdventure();
-    player = new PlayerAdventure(map.getRoom());
+    player = new PlayerAdventure(map.getRoom(), 100);
 
 }
 

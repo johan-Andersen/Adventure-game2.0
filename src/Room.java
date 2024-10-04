@@ -10,12 +10,14 @@ public class Room {
     private Room eastRoom;
     private Room westRoom;
     private List<ItemAdventure> itemlist;
+    private List<FoodAdventure> foodList;
 
 
     public Room(String name,String surroundings) {
         this.name = name;
         this.surroundings = surroundings;
         this.itemlist = new ArrayList<>(); // del 2
+        this.foodList = new ArrayList<>(); // del 3
     }
 
     public String getName(){
@@ -88,6 +90,30 @@ public class Room {
 
         itemlist.add(itemToLeave);
     }
+
+
+    //-------------del 3-----------
+
+//    public void addFood(FoodAdventure food) {
+//        foodList.add(food);
+//
+//    }
+//
+//    public List<FoodAdventure> getFoodList() {
+//        return foodList;
+//    }
+//
+//    public FoodAdventure checkRoomForFood(String foodName) {
+//
+//        for(FoodAdventure food : foodList){
+//
+//            if(food.getName().equalsIgnoreCase(foodName)) {
+//                foodList.remove(food);
+//                return food;
+//            }
+//        }
+//        return null;
+//    }
 
 
 

@@ -4,11 +4,13 @@ public class PlayerAdventure {
 
     private Room currentRoom;
     private ArrayList<ItemAdventure> itemListInventory;
+    private double health;
 
-    public PlayerAdventure(Room firstRoom) {
+    public PlayerAdventure(Room firstRoom, double health) {
 
         this.currentRoom = firstRoom;
         this.itemListInventory = new ArrayList<>();
+        this.health = health;
 
     }
 
@@ -62,9 +64,34 @@ public class PlayerAdventure {
     }
 
     public ArrayList<ItemAdventure> getItemListInventory() {
-        return itemListInventory;
+            return itemListInventory;
     }
 
+    @Override
+    public String toString() {
+        return "Health: " + health;
+    }
+
+
+    //-------------------del 3 ----------------
+
+
+    public double consume( FoodAdventure food) {
+
+        health = health + food.getHealthPoints();
+
+        if(health > 100) {
+
+            health = 100;
+        }
+
+        itemListInventory.remove(food);
+        return health;
+    }
+
+    public double getHealth(){
+        return health;
+    }
 
 
 }

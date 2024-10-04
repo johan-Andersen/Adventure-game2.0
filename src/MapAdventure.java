@@ -57,11 +57,28 @@ public class MapAdventure {
 
         ItemAdventure torch = new ItemAdventure("torch", "an old wooding torch, with a calming warm flame");
         ItemAdventure rock = new ItemAdventure("rock", "wet and slippery");
-        ItemAdventure paper = new ItemAdventure("paper", "A brown piece of paper with an unknown language written on it");
+        ItemAdventure paper = new ItemAdventure("paper", "A brown piece of paper with an unknown language written on it. Must be the ancient language of the vampires ");
+        ItemAdventure shoes = new ItemAdventure("shoes", "A pair of, what seems to be a, new leather boots");
+
+
 
         room1.addItems(torch);
         room1.addItems(rock);
         room2.addItems(paper);
+        room3.addItems(shoes);
+
+        FoodAdventure bread = new FoodAdventure("bread", "a hard piece of rie bread", 10);
+        FoodAdventure cigarette = new FoodAdventure("cigarette", "a bag with rolling tobacco and paper", -20);
+        FoodAdventure foot = new FoodAdventure("foot", "A rotten human foot, cut off by the ankle", -15);
+        FoodAdventure blood = new FoodAdventure("jar of blood", "a dusty old jar, filled with blood. The top sealed with dark red wax", 30);
+
+
+
+        room1.addItems(bread);
+        room7.addItems(cigarette);
+        room9.addItems(foot);
+        room6.addItems(blood);
+
 
 
     }
