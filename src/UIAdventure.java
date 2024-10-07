@@ -1,4 +1,5 @@
 import java.io.FileOutputStream;
+import java.sql.SQLOutput;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
@@ -31,8 +32,66 @@ public class UIAdventure {
 
             switch (action) {
 
+                case "attack" -> {
+                    if (word.length < 2) {
+                        System.out.println("attack what");
+
+                    } else if (adventure.getPlayer().getEquippedWeapon().isEmpty()) {
+                        System.out.println("you dont have a weapon equipped");
+
+                    }
+                    else {
+                        WeaponsAdventure weapon = (WeaponsAdventure) adventure.getPlayer().getWeapon();
+                        if (weapon != null && weapon.getAmmunition() > 0) {
+                            weapon.useAmmunition();
+                            System.out.println("you attacked with a " + weapon.getName() + ". Ammunition left: " + weapon.getAmmunition());
+                        } else {
+                            System.out.println("No ammunition left for " + weapon.getName());
+                        }
+                    }
+
+
+                }
+                case "equip" -> {
+                    if (word.length < 2) {
+                        System.out.println("equip what?");
+                    } else {
+                        String weaponName = word[1].trim();
+                        ItemAdventure weaponChosen = null;
+
+                        for (ItemAdventure item : adventure.getPlayer().getItemListInventory()) {
+                            if (item.getName().equalsIgnoreCase(weaponName)) {
+                                weaponChosen = item;
+                                break;
+                            }
+                        }
+                        if (weaponChosen == null) {
+                            System.out.println("You don't have this in your inventory.");
+                        } else if (!(weaponChosen instanceof WeaponsAdventure)) {
+
+                            System.out.println("This isn't a weapon!");
+                        } else {
+                            WeaponsAdventure weapon = (WeaponsAdventure) weaponChosen;
+                            if (!adventure.getPlayer().getEquippedWeapon().isEmpty()) {
+
+                                adventure.getPlayer().getEquippedWeapon().remove(0);
+                                adventure.getPlayer().addweaponToEquipped(weapon);
+                                System.out.println(weapon + " has been equipped");
+                                break;
+                            } else {
+                                adventure.getPlayer().addweaponToEquipped(weapon);
+                                System.out.println(weapon + " has been equipped");
+                            }
+
+
+                        }
+                    }
+                }
+
+
                 case "health" -> {
                     System.out.println(adventure.getPlayer().toString());
+                    break;
                 }
                 case "eat" -> {
                     if (word.length < 2) {
@@ -48,7 +107,7 @@ public class UIAdventure {
                             }
                         }
                         for (ItemAdventure item : adventure.getPlayer().getItemListInventory())
-                            if(item instanceof FoodAdventure && item.getName().equalsIgnoreCase(foodName))  {
+                            if (item instanceof FoodAdventure && item.getName().equalsIgnoreCase(foodName)) {
                                 foodToEat = (FoodAdventure) item;
                                 break;
                             }
@@ -64,6 +123,7 @@ public class UIAdventure {
                             System.out.println("You cant eat that");
                         }
                     }
+                    break;
                 }
                 case "take" -> {
                     if (word.length < 2) {   // If statement checks if the "parts" (our string input) has less than index 1 (2 spaces)
@@ -81,6 +141,7 @@ public class UIAdventure {
                             System.out.println("no such item in this room");
                         }
                     }
+                    break;
 
                 }
                 case "leave" -> {
@@ -100,22 +161,24 @@ public class UIAdventure {
                         }
                         if (itemToLeave != null) { // if our "itemToLeave" isnt equal to the value of null, that means our "itemName" (the userinput) could be found in our inventory
                             adventure.getPlayer().getCurrentRoom().leaveItem(itemToLeave); // And if  the item was in our inventory we will leave it behind in the current room
-                            adventure.getPlayer().getItemListInventory().remove(itemToLeave); // At the same time we will remove it from our inventory.
+                            adventure.getPlayer().getItemListInventory().remove(itemToLeave);// At the same time we will remove it from our inventory.
+                            adventure.getPlayer().getEquippedWeapon().remove(itemToLeave);
                             System.out.println("you left " + itemName + " in " + adventure.getPlayer().getCurrentRoom().getName());
                         } else {
                             System.out.println("you dont have that item...");  // if "itemToLeave" is equal to null, there is
                             // no match in our inventory and the user will be told no such thign could be found in the inventory
                         }
                     }
+                    break;
                 }
                 case "inventory" -> {
-                    if(!adventure.getPlayer().getItemListInventory().isEmpty()) {
+                    if (!adventure.getPlayer().getItemListInventory().isEmpty()) {
                         System.out.println(adventure.getPlayer().getItemListInventory() + " Is in your bag");
 
-                    }
-                    else {
+                    } else {
                         System.out.println("your bag is empty");
                     }
+                    break;
                 }
                 case "go" -> {
                     if (word.length < 2) {
@@ -135,6 +198,7 @@ public class UIAdventure {
                     } else {
                         System.out.println("go where?");
                     }
+                    break;
                 }
                 case "look" -> {
                     List<ItemAdventure> items = adventure.getPlayer().getCurrentRoom().getItemlist();
@@ -147,6 +211,7 @@ public class UIAdventure {
                             System.out.println(item);
                         }
                     }
+                    break;
                 }
                 case "help" -> {
                     System.out.println("I already told you, this is how you controle the game:");
@@ -156,9 +221,11 @@ public class UIAdventure {
                     System.out.println("Type 'inventory', followed by ENTER to look at your inventory");
                     System.out.println("Type 'take' followed by the object you want to take and ENTER, to pick something up");
                     System.out.println("\n\n\nLet the game begin!... again");
+                    break;
                 }
                 default -> {
                     System.out.println("Unknown command");
+                    break;
                 }
             }
         }

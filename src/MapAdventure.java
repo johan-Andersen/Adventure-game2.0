@@ -67,6 +67,8 @@ public class MapAdventure {
         room2.addItems(paper);
         room3.addItems(shoes);
 
+//------------------ del 3 ----------------------
+
         FoodAdventure bread = new FoodAdventure("bread", "a hard piece of rie bread", 10);
         FoodAdventure cigarette = new FoodAdventure("cigarette", "a bag with rolling tobacco and paper", -20);
         FoodAdventure foot = new FoodAdventure("foot", "A rotten human foot, cut off by the ankle", -15);
@@ -78,6 +80,16 @@ public class MapAdventure {
         room7.addItems(cigarette);
         room9.addItems(foot);
         room6.addItems(blood);
+
+
+// ------------------------ del 4 -----------------
+
+        MeleeWeaponsAdventure hammer = new MeleeWeaponsAdventure("hammer", "steel hammer head, splintering dark wood handle", 5, Double.POSITIVE_INFINITY);
+        RangeWeaponsAdventure bow = new RangeWeaponsAdventure("bow", "beautiful old bow, made by the high elfs", 15, 5);
+
+        room1.addItems(hammer);
+        room3.addItems(bow);
+
 
 
 

@@ -5,12 +5,15 @@ public class PlayerAdventure {
     private Room currentRoom;
     private ArrayList<ItemAdventure> itemListInventory;
     private double health;
+    private ArrayList<ItemAdventure> equipped;
+    private WeaponsAdventure weapon;
 
     public PlayerAdventure(Room firstRoom, double health) {
 
         this.currentRoom = firstRoom;
         this.itemListInventory = new ArrayList<>();
         this.health = health;
+        this.equipped = new ArrayList<>();
 
     }
 
@@ -64,7 +67,7 @@ public class PlayerAdventure {
     }
 
     public ArrayList<ItemAdventure> getItemListInventory() {
-            return itemListInventory;
+        return itemListInventory;
     }
 
     @Override
@@ -76,11 +79,11 @@ public class PlayerAdventure {
     //-------------------del 3 ----------------
 
 
-    public double consume( FoodAdventure food) {
+    public double consume(FoodAdventure food) {
 
         health = health + food.getHealthPoints();
 
-        if(health > 100) {
+        if (health > 100) {
 
             health = 100;
         }
@@ -89,16 +92,28 @@ public class PlayerAdventure {
         return health;
     }
 
-    public double getHealth(){
+    public double getHealth() {
         return health;
     }
 
 
+    //---------------del 4 -------------------
+
+    public void addweaponToEquipped(ItemAdventure weapon) {
+        equipped.add(weapon);
+    }
+
+    public ArrayList getEquippedWeapon() {
+
+        return equipped;
+    }
+
+    public WeaponsAdventure getWeapon() {
+
+        return (WeaponsAdventure) equipped.get(0);
+
+    }
 }
-
-
-
-
 
 
 
