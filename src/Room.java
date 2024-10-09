@@ -10,14 +10,16 @@ public class Room {
     private Room eastRoom;
     private Room westRoom;
     private List<ItemAdventure> itemlist;
-    private List<FoodAdventure> foodList;
+    private List<EnemyAdventure> enemyList;
+    private EnemyAdventure enemy;
+
 
 
     public Room(String name,String surroundings) {
         this.name = name;
         this.surroundings = surroundings;
         this.itemlist = new ArrayList<>(); // del 2
-        this.foodList = new ArrayList<>(); // del 3
+        this.enemyList = new ArrayList<>();
     }
 
     public String getName(){
@@ -55,7 +57,8 @@ public class Room {
   }
 
     public String toString(){
-        return "you're in: " + name + ": " + surroundings;
+        return "you're in: " + name + ": " + surroundings +
+                "\nEnemies in the room: " + enemyList;
 
     }
 
@@ -92,29 +95,19 @@ public class Room {
     }
 
 
-    //-------------del 3-----------
+  //------------ del 5 ----------------------
 
-//    public void addFood(FoodAdventure food) {
-//        foodList.add(food);
-//
-//    }
-//
-//    public List<FoodAdventure> getFoodList() {
-//        return foodList;
-//    }
-//
-//    public FoodAdventure checkRoomForFood(String foodName) {
-//
-//        for(FoodAdventure food : foodList){
-//
-//            if(food.getName().equalsIgnoreCase(foodName)) {
-//                foodList.remove(food);
-//                return food;
-//            }
-//        }
-//        return null;
-//    }
 
+   public void addEnemy(EnemyAdventure enemy) {
+        enemyList.add(enemy);
+   }
+   public  List<EnemyAdventure> getEnemyList() {
+        return enemyList;
+   }
+
+   public EnemyAdventure getEnemy() {
+        return enemyList.getFirst();
+   }
 
 
 

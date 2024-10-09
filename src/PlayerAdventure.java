@@ -103,18 +103,25 @@ public class PlayerAdventure {
         equipped.add(weapon);
     }
 
-    public ArrayList getEquippedWeapon() {
+    public ArrayList<ItemAdventure> getEquippedWeapon() {
 
         return equipped;
     }
 
-    public WeaponsAdventure getWeapon() {
+    public WeaponsAdventure getPlayerWeapon() {
 
         return (WeaponsAdventure) equipped.get(0);
 
     }
-}
 
+//---------------- del 5 --------------------------
+
+    public void takeDamagePlayer(WeaponsAdventure weapon) {
+
+        health -= weapon.getDamage();
+
+    }
+}
 
 
 
