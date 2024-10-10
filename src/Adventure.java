@@ -18,8 +18,8 @@ public class Adventure {
         return player;
     }
 
-    public boolean IsEnemyListEmpty () {
-        return getPlayer().getCurrentRoom().getEnemyList().isEmpty();
+    public List<EnemyAdventure> IsEnemyListEmpty () {
+        return getPlayer().getCurrentRoom().getEnemyList();
     }
     public List<EnemyAdventure> getEnemyListA(){
         return getPlayer().getCurrentRoom().getEnemyList();

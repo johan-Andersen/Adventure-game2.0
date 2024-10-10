@@ -33,43 +33,47 @@ public class UIAdventure {
 
                 case "attack" -> {
                     if (word.length < 2) {
-                        if (adventure.IsEnemyListEmpty()) {
-                            WeaponsAdventure weapon = adventure.getPlayerWeaponA();// if the equipped weapon array isnt empty, we'll make a variable, of type WeaponAdventure, and assigns it the value of
-                            // the weapon in our equipped Arraylist (at index 0)
-                            if (weapon != null && weapon.getAmmunition() > 0) { //we'll check if our weapon variable isnt null and the weapons ammunition havent run out
-                                weapon.useAmmunition(); //we use our method from the weapons class to use one ammunition for each time the user attacks
-                                System.out.println("congrats, you attacked the AIR with your " + weapon.getName() + "...  Ammunition left: " + weapon.getAmmunition());
-                            } else {
-                                System.out.println("No ammunition left for " + weapon.getName() + ". Also.. no one's here"); // if the if statement is false and there is no ammunition left, the user will be told that there is no amo left
-                            }
-                        }
-                        if (!adventure.IsEnemyListEmpty()) {
-                            WeaponsAdventure weapon = adventure.getPlayerWeaponA(); // if the equipped weapon array isnt empty, we'll make a variable, of type WeaponAdventure, and assigns it the value of
-                            // the weapon in our equipped Arraylist (at index 0)
-                            if (weapon != null && weapon.getAmmunition() > 0) { //we'll check if our weapon variable isnt null and the weapons ammunition havent run out
-                                weapon.useAmmunition();//we use our method from the weapons class to use one ammunition for each time the user attacks
-                                System.out.println("you attacked with a " + weapon.getName() + ". Ammunition left: " + weapon.getAmmunition()); // we also print out what weapon the user attacked with and the ammunition thats left
-
-                                adventure.takeDamageEnemyA(weapon); //we take use of the method "takeDamage" from the Enemy class. The methods subtracks the enemy's health with the equipped weapon
-
-                                if (adventure.getEnemyHealthA() < 1) {
-
-                                    System.out.println("You killed the " + adventure.getEnemyNameA() + "! Well done!");
-                                    System.out.println("The " + adventure.getEnemyNameA() + " dropped its weapon");
-                                    adventure.addItemsA(adventure.getEnemyWeaponA());
-                                    adventure.getEnemyListA().removeFirst();
+                        if(adventure.getEquippedWeaponA().isEmpty()) {
+                            System.out.println("you dont have a weapon equipped");
+                        } else {
+                            if (adventure.IsEnemyListEmpty().isEmpty()) {
+                                WeaponsAdventure weapon = adventure.getPlayerWeaponA();// if the equipped weapon array isnt empty, we'll make a variable, of type WeaponAdventure, and assigns it the value of
+                                // the weapon in our equipped Arraylist (at index 0)
+                                if (weapon != null && weapon.getAmmunition() > 0) { //we'll check if our weapon variable isnt null and the weapons ammunition havent run out
+                                    weapon.useAmmunition(); //we use our method from the weapons class to use one ammunition for each time the user attacks
+                                    System.out.println("congrats, you attacked the AIR with your " + weapon.getName() + "...  Ammunition left: " + weapon.getAmmunition());
                                 } else {
-                                    adventure.takeDamagePlayerA(adventure.getEnemyWeaponA()); // after the attacking the enemy, the enemy attacks back. For this we use the method "takeDamagePlayer"
+                                    System.out.println("No ammunition left for " + weapon.getName() + ". Also.. no one's here"); // if the if statement is false and there is no ammunition left, the user will be told that there is no amo left
+                                }
+                            }
+                            if (!adventure.IsEnemyListEmpty().isEmpty()) {
+                                WeaponsAdventure weapon = adventure.getPlayerWeaponA(); // if the equipped weapon array isnt empty, we'll make a variable, of type WeaponAdventure, and assigns it the value of
+                                // the weapon in our equipped Arraylist (at index 0)
+                                if (weapon != null && weapon.getAmmunition() > 0) { //we'll check if our weapon variable isnt null and the weapons ammunition havent run out
+                                    weapon.useAmmunition();//we use our method from the weapons class to use one ammunition for each time the user attacks
+                                    System.out.println("you attacked with a " + weapon.getName() + ". Ammunition left: " + weapon.getAmmunition()); // we also print out what weapon the user attacked with and the ammunition thats left
 
-                                    System.out.println("The " + adventure.getEnemyNameA() + "'s health is at: " + adventure.getEnemyHealthA());
+                                    adventure.takeDamageEnemyA(weapon); //we take use of the method "takeDamage" from the Enemy class. The methods subtracks the enemy's health with the equipped weapon
 
-                                    System.out.println("\nThe " + adventure.getEnemyNameA() + " attacked back!! Your health is at: " + adventure.getPlayerHealthA());
+                                    if (adventure.getEnemyHealthA() < 1) {
 
-                                    if (adventure.getPlayer().getHealth() < 1) {
-                                        System.out.println("YOU DIED . GAME OVER!!");
-                                        System.exit(0);
+                                        System.out.println("You killed the " + adventure.getEnemyNameA() + "! Well done!");
+                                        System.out.println("The " + adventure.getEnemyNameA() + " dropped its weapon");
+                                        adventure.addItemsA(adventure.getEnemyWeaponA());
+                                        adventure.getEnemyListA().removeFirst();
+                                    } else {
+                                        adventure.takeDamagePlayerA(adventure.getEnemyWeaponA()); // after the attacking the enemy, the enemy attacks back. For this we use the method "takeDamagePlayer"
+
+                                        System.out.println("The " + adventure.getEnemyNameA() + "'s health is at: " + adventure.getEnemyHealthA());
+
+                                        System.out.println("\nThe " + adventure.getEnemyNameA() + " attacked back!! Your health is at: " + adventure.getPlayerHealthA());
+
+                                        if (adventure.getPlayer().getHealth() < 1) {
+                                            System.out.println("YOU DIED . GAME OVER!!");
+                                            System.exit(0);
+                                        }
+
                                     }
-
                                 }
                             }
                         }
